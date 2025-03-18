@@ -6,16 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.geeks.mvp.databinding.FragmentFirstBinding
 import com.geeks.mvp.presentation.viewmodel.FirstViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-@AndroidEntryPoint
 class FirstFragment : Fragment() {
 
-    private val viewModel: FirstViewModel by viewModels()
+    private val viewModel: FirstViewModel by viewModel()
 
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
@@ -32,7 +30,6 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCounter()
         viewModel.counter.observe(viewLifecycleOwner) { counter ->
             binding.tvCounter.text = counter.count.toString()
         }
