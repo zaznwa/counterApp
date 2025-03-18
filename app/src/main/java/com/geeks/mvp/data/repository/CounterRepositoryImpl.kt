@@ -1,7 +1,7 @@
 package com.geeks.mvp.data.repository
 
 import com.geeks.mvp.data.datacourse.EmulateService
-import com.geeks.mvp.data.mapper.toDomain
+import com.geeks.mvp.data.mappers.toDomain
 import com.geeks.mvp.domain.model.CounterEntity
 import com.geeks.mvp.domain.repository.CounterRepository
 
