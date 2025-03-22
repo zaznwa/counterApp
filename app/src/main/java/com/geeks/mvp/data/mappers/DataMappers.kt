@@ -15,4 +15,6 @@ fun counterDtoToDomain (dto: CounterDto): CounterEntity {
         count = dto.count,
         operationType = OperationType.fromString(dto.operationType)
     )
+
+
 }

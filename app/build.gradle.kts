@@ -37,7 +37,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 
@@ -65,4 +65,22 @@ dependencies {
 
     //koin
     implementation(libs.koin.android)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
+
+
+    implementation(libs.converter.gson) // Для Gson
+    // implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion") // Для Moshi
+
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.glide)
+
+    implementation (libs.androidx.lifecycle.extensions)
+
+
+
 }
