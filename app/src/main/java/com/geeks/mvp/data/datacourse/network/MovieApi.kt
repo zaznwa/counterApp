@@ -1,6 +1,6 @@
 package com.geeks.mvp.data.datacourse.network
 
-import com.geeks.mvp.data.model.models.MovieApiResponse
+import com.geeks.mvp.data.model.MovieApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -7,13 +7,21 @@ import com.geeks.mvp.domain.repository.MovieRepository
 import com.geeks.mvp.data.mappers.MovieMapper
 import com.geeks.mvp.domain.model.MovieEntity
 import com.geeks.mvp.domain.usecases.MovieUserCase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.java.KoinJavaComponent.inject
 
 class MovieViewModel(
     private val moviesUseCase: MovieUserCase,
+    private val mainDispatcher: CoroutineDispatcher,
+    private val ioDispatcher: CoroutineDispatcher,
+    private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
+
 
     private val _movies = MutableStateFlow<List<MovieEntity>>(emptyList())
     val movies = _movies.asStateFlow()
@@ -21,15 +29,15 @@ class MovieViewModel(
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage = _errorMessage.asStateFlow()
 
-    fun searchMovies(query: String) {
-        viewModelScope.launch {
+   suspend fun searchMovies(query: String) {
+        withContext(ioDispatcher) {
             try {
                 Log.d("ololo", "Запрос на поиск: $query")
                 _movies.value = moviesUseCase(query)
             } catch (e: Exception) {
-                Log.e("ololo", "Ошибка при поиске фильмов", e)
-                _errorMessage.value = "Сбой в сервере. Ошибка: ${e.localizedMessage}"
+                _errorMessage.value = "Ошибка: ${e.localizedMessage}"
             }
         }
     }
+
 }

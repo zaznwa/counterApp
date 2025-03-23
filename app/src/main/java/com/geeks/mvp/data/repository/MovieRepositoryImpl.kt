@@ -2,7 +2,7 @@ package com.geeks.mvp.data.repository
 
 import com.geeks.mvp.data.datacourse.network.MovieApi
 import com.geeks.mvp.domain.repository.MovieRepository
-import com.geeks.mvp.data.model.models.MovieApiResponse
+import com.geeks.mvp.data.model.MovieApiResponse
 
 class MovieRepositoryImpl(
     private val api: MovieApi,

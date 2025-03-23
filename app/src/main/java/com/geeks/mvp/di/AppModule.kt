@@ -1,3 +1,3 @@
 package com.geeks.mvp.di
 
-val appModule = listOf(dataModule,  domainModule, viewModelModule, networkModule,)
+val appModule = listOf(dataModule,  domainModule, viewModelModule, networkModule, dispatcherModule)

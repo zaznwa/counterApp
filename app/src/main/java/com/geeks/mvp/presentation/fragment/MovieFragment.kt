@@ -35,7 +35,9 @@ class MovieFragment : Fragment() {
         binding.btnSearch.setOnClickListener {
             val query = binding.etSearch.text.toString()
             if (query.isNotEmpty()) {
-                movieViewModel.searchMovies(query)
+                lifecycleScope.launch {
+                    movieViewModel.searchMovies(query)
+                }
             } else {
                 Toast.makeText(requireContext(), "Введите запрос", Toast.LENGTH_SHORT).show()
             }
@@ -50,7 +52,9 @@ class MovieFragment : Fragment() {
                         .load(movies.first().posterUrl)
                         .into(binding.imgMoviePoster)
                 } else {
-
+                    binding.tvMovieTitle.text = "Фильмы не найдены"
+                    binding.tvMovieDescription.text = ""
+                    binding.imgMoviePoster.setImageDrawable(null)
                 }
             }
         }

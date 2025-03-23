@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        GlobalScope.launch(Dispatchers.Main){
-            Log.e("ololo", "onCreate: ", )
-            delay(3000)
-        }
+//        GlobalScope.launch(Dispatchers.Main){
+//            Log.e("ololo", "onCreate: ", )
+//            delay(3000)
+//        }
 
 //        Thread.sleep(3000)
     }

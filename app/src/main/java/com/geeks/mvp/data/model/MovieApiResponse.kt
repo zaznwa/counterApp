@@ -1,4 +1,4 @@
-package com.geeks.mvp.data.model.models
+package com.geeks.mvp.data.model
 
 
 import kotlinx.serialization.SerialName

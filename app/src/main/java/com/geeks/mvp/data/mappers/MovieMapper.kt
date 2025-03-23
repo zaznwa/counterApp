@@ -1,6 +1,6 @@
 package com.geeks.mvp.data.mappers
 
-import com.geeks.mvp.data.model.models.MovieApiResponse
+import com.geeks.mvp.data.model.MovieApiResponse
 import com.geeks.mvp.domain.model.MovieEntity
 
 class MovieMapper {

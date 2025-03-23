@@ -9,7 +9,17 @@ class MovieUserCase(
     private val movieMapper: MovieMapper,
 ) {
     suspend operator fun invoke(query: String): List<MovieEntity> {
-        val response = movieRepository.searchMovies(query)
-        return response.docs?.map { movieMapper.mapToDomain(it!!) } ?: emptyList()
+        return try {
+            val response = movieRepository.searchMovies(query)
+            return response.docs?.mapNotNull { doc ->
+                try {
+                    doc?.let { movieMapper.mapToDomain(it) }
+                } catch (e: Exception) {
+                    null
+                }
+            } ?: emptyList()
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }
