@@ -54,6 +54,13 @@ class MovieFragment : Fragment() {
                 }
             }
         }
+        lifecycleScope.launch {
+            movieViewModel.errorMessage.collect { message ->
+                message?.let {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 

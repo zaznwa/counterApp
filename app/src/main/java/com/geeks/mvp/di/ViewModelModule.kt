@@ -15,8 +15,7 @@ val viewModelModule = module {
     }
     viewModel {
         MovieViewModel(
-            movieRepository = get(),
-            movieMapper = get()
+            moviesUseCase = get()
         )
     }
 }
