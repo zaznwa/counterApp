@@ -54,7 +54,7 @@ class FirstFragment : Fragment() {
             try {
                 val navController = findNavController()
                 Log.d("ololo", "NavController найден: $navController")
-                navController.navigate(R.id.action_firstFragment_to_movieFragment)
+//                navController.navigate(R.id.action_firstFragment_to_movieFragment)
             } catch (e: Exception) {
                 Log.e("ololo", "Ошибка при поиске NavController", e)
             }

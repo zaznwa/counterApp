@@ -2,27 +2,33 @@ package com.geeks.mvp.di
 
 import android.util.Log
 import com.geeks.mvp.data.datacourse.network.MovieApi
+import com.geeks.mvp.data.repository.MovieRepositoryImpl
+import com.geeks.mvp.domain.repository.MovieRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
-    single {
-        provideRetrofit(okHttpClient = get())
+    single { provideRetrofit(okHttpClient = get()) }
+    single { provideApiService(retrofit = get()) }
+    single { provideOkHttpClient(interceptor = get()) }
+    single { provideLoggingInterceptor() }
+    single { provideJson() }
+    single<MovieRepository> {
+        MovieRepositoryImpl(
+            api = get(),
+            ioDispatcher = get(named("io"))
+            )
     }
-    single {
-        provideApiService(retrofit = get())
-    }
-    single {
-        provideOkHttpClient(interceptor = get())
-    }
-    single {
-        provideLoggingInterceptor()
-    }
+
 }
+
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
@@ -46,11 +52,18 @@ fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
             chain.proceed(request)
         }
         //.callTimeout(10L, TimeUnit.SECONDS)
-        .connectTimeout(10L, TimeUnit.SECONDS)
-        .readTimeout(10L, TimeUnit.SECONDS)
-        .writeTimeout(10L, TimeUnit.SECONDS)
+        .connectTimeout(15L, TimeUnit.SECONDS)
+        .readTimeout(105, TimeUnit.SECONDS)
+        .writeTimeout(15L, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
         .build()
+}
+
+fun provideJson(): Json {
+    return Json {
+        isLenient = true
+        ignoreUnknownKeys = true
+    }
 }
 
 fun provideLoggingInterceptor(): HttpLoggingInterceptor {
@@ -58,3 +71,4 @@ fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         level = HttpLoggingInterceptor.Level.BODY
     }
 }
+

@@ -5,53 +5,69 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragment.MovieFragment">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
     <LinearLayout
+        android:id="@+id/movieContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center">
+        android:visibility="visible">
 
 
-        <EditText
-            android:id="@+id/et_search"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Введите название фильма"
-            android:inputType="text" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Поиск"
-            android:layout_marginTop="8dp"/>
 
-        <ImageView
-            android:id="@+id/img_movie_poster"
-            android:layout_width="200dp"
-            android:layout_height="300dp"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="16dp"/>
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Введите название фильма"
+                android:inputType="text" />
 
-        <TextView
-            android:id="@+id/tv_movie_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="Название фильма"
-            android:layout_marginTop="8dp"/>
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Поиск" />
 
-        <TextView
-            android:id="@+id/tv_movie_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Описание фильма"
-            android:layout_marginTop="8dp"/>
+            <ImageView
+                android:id="@+id/img_movie_poster"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop" />
 
+            <TextView
+                android:id="@+id/tv_movie_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Название фильма"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_movie_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Описание фильма"
+                android:textSize="16sp" />
+
+        </LinearLayout>
     </LinearLayout>
-
 
 </FrameLayout>
