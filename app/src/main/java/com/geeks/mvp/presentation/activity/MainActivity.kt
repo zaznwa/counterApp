@@ -1,21 +1,25 @@
 package com.geeks.mvp.presentation.activity
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.geeks.mvp.R
-import com.geeks.mvp.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+
+
+//        GlobalScope.launch(Dispatchers.Main){
+//            Log.e("ololo", "onCreate: ", )
+//            delay(3000)
+//        }
+
+//        Thread.sleep(3000)
     }
 }

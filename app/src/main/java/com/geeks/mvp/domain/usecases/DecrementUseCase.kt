@@ -1,14 +1,12 @@
 package com.geeks.mvp.domain.usecases
 
 import com.geeks.mvp.domain.repository.CounterRepository
-import javax.inject.Inject
 
-class DecrementUseCase @Inject constructor(
+class DecrementUseCase(
     private val counterRepository: CounterRepository,
 ) {
 
-    fun decrement() {
-        counterRepository.decrement()
-    }
+    operator fun invoke() = counterRepository.decrement()
+
 
 }

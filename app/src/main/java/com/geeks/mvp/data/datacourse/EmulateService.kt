@@ -1,9 +1,8 @@
 package com.geeks.mvp.data.datacourse
 
 import com.geeks.mvp.data.model.CounterDto
-import javax.inject.Inject
 
-class EmulateService @Inject constructor() {
+class EmulateService () {
 
     private var count = 0
     private var isIncrement = false
