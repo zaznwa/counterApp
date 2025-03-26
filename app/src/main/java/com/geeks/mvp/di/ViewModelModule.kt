@@ -16,9 +16,7 @@ val viewModelModule = module {
     viewModel {
         MovieViewModel(
             moviesUseCase = get(),
-            mainDispatcher = get(),
             ioDispatcher = get(),
-            defaultDispatcher = get()
         )
     }
 }
