@@ -1,10 +1,10 @@
 package com.geeks.mvp.data.mappers
 
-import com.geeks.mvp.data.model.MovieApiResponse
+import com.geeks.mvp.data.model.movieResponse.MovieApiResponse
 import com.geeks.mvp.domain.model.MovieEntity
 
 class MovieMapper {
-    fun mapToDomain(movie: MovieApiResponse.Doc): MovieEntity {
+    fun mapToEntity(movie: MovieApiResponse.MovieList): MovieEntity {
         return MovieEntity(
             name = movie.name ?: "",
             description = movie.description ?: "",

@@ -4,7 +4,6 @@ import android.util.Log
 import com.geeks.mvp.data.datacourse.network.MovieApi
 import com.geeks.mvp.data.repository.MovieRepositoryImpl
 import com.geeks.mvp.domain.repository.MovieRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,7 +22,7 @@ val networkModule = module {
     single<MovieRepository> {
         MovieRepositoryImpl(
             api = get(),
-            ioDispatcher = get(named("io"))
+            io = get(named("io"))
             )
     }
 
