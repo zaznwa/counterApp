@@ -2,8 +2,8 @@ package com.geeks.mvp.di
 
 import android.util.Log
 import com.geeks.mvp.data.datacourse.network.MovieApi
-import com.geeks.mvp.data.repository.MovieRepositoryImpl
-import com.geeks.mvp.domain.repository.MovieRepository
+import com.geeks.mvp.data.repository.ApiRepositoryImpl
+import com.geeks.mvp.domain.repository.ApiRepository
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,8 +19,8 @@ val networkModule = module {
     single { provideOkHttpClient(interceptor = get()) }
     single { provideLoggingInterceptor() }
     single { provideJson() }
-    single<MovieRepository> {
-        MovieRepositoryImpl(
+    single<ApiRepository> {
+        ApiRepositoryImpl(
             api = get(),
             io = get(named("io"))
             )

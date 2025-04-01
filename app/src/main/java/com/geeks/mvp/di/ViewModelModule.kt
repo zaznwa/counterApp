@@ -15,8 +15,10 @@ val viewModelModule = module {
     }
     viewModel {
         MovieViewModel(
-            moviesUseCase = get(),
+            getMovieUseCase = get(),
             ioDispatcher = get(),
+            getExampleUseCase = get(),
+            mainDispatcher = get()
         )
     }
 }

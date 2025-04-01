@@ -5,6 +5,8 @@ import com.geeks.mvp.data.model.example.ExampleDto
 import com.geeks.mvp.domain.model.CounterEntity
 import com.geeks.mvp.domain.model.Example
 import com.geeks.mvp.domain.model.OperationType
+import com.geeks.mvp.data.mappers.toDomain
+
 
 fun CounterDto.toDomain(): CounterEntity {
     return CounterEntity(
@@ -24,3 +26,6 @@ fun ExampleDto.toDomain() = Example(
     id = id,
     value = value
 )
+
+
+
