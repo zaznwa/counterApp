@@ -33,11 +33,7 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
         binding.btnSearch.setOnClickListener {
-
             val query = binding.etSearch.text.toString()
             if (query.isNotEmpty()) {
                 movieViewModel.searchMovies(query)

@@ -5,6 +5,7 @@ import com.geeks.mvp.domain.model.MovieEntity
 import com.geeks.mvp.domain.usecases.networkUseCases.GetExampleUseCase
 import com.geeks.mvp.domain.usecases.networkUseCases.GetMovieUseCase
 import com.geeks.mvp.presentation.base.BaseViewModel
+import com.geeks.mvp.presentation.ui.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,18 +33,25 @@ class MovieViewModel(
 //    val movieState= _movieState.asStateFlow()
 
     fun searchMovies(query: String) {
-        _movieState.colFlow(getMovieUseCase.invoke()
+        collectRequest(
+            request = { getMovieUseCase.invoke(query) },
+            state = _movieState,
+            dispatcher = ioDispatcher
+        )
     }
 
     fun exampleRequest() {
+        collectRequest(state = _exampleState, dispatcher =  mainDispatcher) {
+            getExampleUseCase.invoke()
+        }
     }
 
 
-    sealed class UiState<out T> {
-        data object Initial : UiState<Nothing>()
-        data object Loading : UiState<Nothing>()
-        data class Success<T>(val data: T) : UiState<T>()
-        data class Error(val message: String) : UiState<Nothing>()
-        data object Empty : UiState<Nothing>()
-    }
+//    sealed class UiState<out T> {
+//        data object Initial : UiState<Nothing>()
+//        data object Loading : UiState<Nothing>()
+//        data class Success<T>(val data: T) : UiState<T>()
+//        data class Error(val message: String) : UiState<Nothing>()
+//        data object Empty : UiState<Nothing>()
+//    }
 }
