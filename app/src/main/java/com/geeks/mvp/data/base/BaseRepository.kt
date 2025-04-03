@@ -20,7 +20,7 @@ abstract class BaseRepository {
                 if (response != null) {
                     emit(Either.Right(response))
                 } else {
-                    emit(Either.Left(Exception(message = "Ошибка")))
+                    emit(Either.Left(Exception("Ошибка")))
                 }
             } catch (e: Exception) {
                 emit(Either.Left(error = e))
