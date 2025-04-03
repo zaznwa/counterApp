@@ -12,6 +12,6 @@ import org.koin.dsl.module
 val dataModule = module {
     single { EmulateService() }
     single<CounterRepository> { CounterRepositoryImpl(get()) }
-    single<ApiRepository> { ApiRepositoryImpl(get(), Dispatchers.IO) }
+    single<ApiRepository> { ApiRepositoryImpl(get(), Dispatchers.IO, get()) }
     single { MovieMapper() }
 }
