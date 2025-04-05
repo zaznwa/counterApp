@@ -9,7 +9,6 @@ val dispatcherModule = module {
     single<CoroutineDispatcher>(
         named("io")
     ) { Dispatchers.IO }
-//    single { Dispatchers.IO }
     single { Dispatchers.Main }
     single { Dispatchers.Default }
 }

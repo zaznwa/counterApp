@@ -22,7 +22,8 @@ val networkModule = module {
     single<ApiRepository> {
         ApiRepositoryImpl(
             api = get(),
-            io = get(named("io"))
+            io = get(named("io")),
+            mapper = get()
             )
     }
 

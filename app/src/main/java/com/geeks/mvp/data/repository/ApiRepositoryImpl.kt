@@ -1,10 +1,9 @@
 package com.geeks.mvp.data.repository
 
+import android.util.Log
 import com.geeks.mvp.data.base.BaseRepository
 import com.geeks.mvp.data.datacourse.network.MovieApi
 import com.geeks.mvp.data.mappers.MovieMapper
-import com.geeks.mvp.data.mappers.toDomain
-import com.geeks.mvp.domain.model.Example
 import com.geeks.mvp.domain.model.MovieEntity
 import com.geeks.mvp.domain.repository.ApiRepository
 import com.geeks.mvp.domain.utils.Either
@@ -20,14 +19,16 @@ class ApiRepositoryImpl(
     override suspend fun searchMovies(
         query: String,
     ): Flow<Either<Throwable, List<MovieEntity>>> = makeRequest {
-        api.searchMovies(query = query).movies
-            ?.mapNotNull { movieDto ->
-                movieDto?.let { mapper.mapToEntity(it) }
-            } ?: emptyList()
-    }.flowOn(io)
+        try {
+            val response = api.searchMovies(query, page = 1, limit = 10)
+            Log.d("ololo", "Ответ от API: ${response.movies}")
+            response.movies
+                ?.mapNotNull { dto -> dto?.let { mapper.mapToEntity(it) } }
+                ?: emptyList()
+        } catch (e: Exception) {
+            Log.d("ololo", "Ошибка при запросе к API: ${e.localizedMessage}")
+            throw e
+        }
 
-
-    override suspend fun exampleRequest(): Flow<Either<Throwable, Example>> = makeRequest {
-        api.exampleRequest().body()?.toDomain() ?: throw Exception("Ошибка")
     }.flowOn(io)
 }
