@@ -7,6 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 
 val dataModule = module {
-    single<ApiRepository> { ApiRepositoryImpl(get(), Dispatchers.IO, get()) }
+//    single<ApiRepository> { ApiRepositoryImpl(get(), Dispatchers.IO, get()) }
     single { MovieMapper() }
 }
