@@ -1,55 +1,54 @@
 package com.geeks.mvp.presentation.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.geeks.mvp.databinding.FragmentMovieBinding
+import com.geeks.mvp.presentation.base.BaseFragment
+import com.geeks.mvp.presentation.base.BaseViewModel
+import com.geeks.mvp.presentation.utils.UiState
 import com.geeks.mvp.presentation.viewmodel.MovieViewModel
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MovieFragment : Fragment() {
+class MovieFragment : BaseFragment<FragmentMovieBinding, MovieViewModel>(
+    FragmentMovieBinding::inflate
+) {
 
-    private val movieViewModel: MovieViewModel by viewModel()
-    private var _binding: FragmentMovieBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentMovieBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
+    override val viewModel: MovieViewModel by vm()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupCollectors()
+    }
 
-
+    override fun setupListeners() {
         binding.btnSearch.setOnClickListener {
             val query = binding.etSearch.text.toString()
             if (query.isNotEmpty()) {
-                lifecycleScope.launch {
-                    movieViewModel.searchMovies(query)
-                }
+                viewModel.searchMovies(query)
             } else {
                 Toast.makeText(requireContext(), "Введите запрос", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        lifecycleScope.launch {
-            movieViewModel.movies.collect { movies ->
-                if (movies.isNotEmpty()) {
-                    binding.tvMovieTitle.text = movies.first().name
-                    binding.tvMovieDescription.text = movies.first().description
+    override fun setupCollectors() {
+        viewModel.movieState.collectState(
+            state = { state ->
+                if (state is UiState.Loading) {
+                    showProgressBar()
+                } else {
+                    hideProgressBar()
+                }
+            },
+            showSuccess = { movies ->
+                val movie = movies.firstOrNull()
+                if (movie != null) {
+                    binding.tvMovieTitle.text = movie.name
+                    binding.tvMovieDescription.text = movie.description
                     Glide.with(this@MovieFragment)
-                        .load(movies.first().posterUrl)
+                        .load(movie.posterUrl)
                         .into(binding.imgMoviePoster)
                 } else {
                     binding.tvMovieTitle.text = "Фильмы не найдены"
@@ -57,19 +56,6 @@ class MovieFragment : Fragment() {
                     binding.imgMoviePoster.setImageDrawable(null)
                 }
             }
-        }
-        lifecycleScope.launch {
-            movieViewModel.errorMessage.collect { message ->
-                message?.let {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        )
     }
 }

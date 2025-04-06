@@ -1,4 +1,4 @@
-package com.geeks.mvp.data.model
+package com.geeks.mvp.data.model.movieResponse
 
 
 import kotlinx.serialization.SerialName
@@ -7,10 +7,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MovieApiResponse(
     @SerialName("docs")
-    var docs: List<Doc?>?
+    var movies: List<MovieList?>?
 ) {
     @Serializable
-    data class Doc(
+    data class MovieList(
         @SerialName("name")
         var name: String?,  // Название фильма
         @SerialName("poster")
