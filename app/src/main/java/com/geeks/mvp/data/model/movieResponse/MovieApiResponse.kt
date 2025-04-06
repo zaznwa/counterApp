@@ -1,28 +1,29 @@
-package com.geeks.mvp.data.model
+package com.geeks.mvp.data.model.movieResponse
 
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieApiResponse(
-    @SerialName("docs")
-    var docs: List<Doc?>?
+    @SerializedName("docs")
+    var movies: List<MovieList?>?
 ) {
     @Serializable
-    data class Doc(
-        @SerialName("name")
+    data class MovieList(
+        @SerializedName("name")
         var name: String?,  // Название фильма
-        @SerialName("poster")
+        @SerializedName("poster")
         var poster: Poster?,  // Постер
-        @SerialName("description")
+        @SerializedName("description")
         var description: String?  // Описание
     )
         @Serializable
         data class Poster(
-            @SerialName("previewUrl")
+            @SerializedName("previewUrl")
             var previewUrl: String?,
-            @SerialName("url")
+            @SerializedName("url")
             var url: String?
         )
 
