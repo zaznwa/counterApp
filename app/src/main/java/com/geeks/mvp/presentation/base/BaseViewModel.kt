@@ -3,8 +3,8 @@ package com.geeks.mvp.presentation.base
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.geeks.mvp.domain.utils.Either
-import com.geeks.mvp.presentation.state.UiState
+import com.geeks.mvp.presentation.utils.Either
+import com.geeks.mvp.presentation.utils.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

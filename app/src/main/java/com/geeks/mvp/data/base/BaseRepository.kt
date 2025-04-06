@@ -1,6 +1,6 @@
 package com.geeks.mvp.data.base
 
-import com.geeks.mvp.domain.utils.Either
+import com.geeks.mvp.presentation.utils.Either
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

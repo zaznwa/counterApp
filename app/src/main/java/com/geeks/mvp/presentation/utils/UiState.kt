@@ -1,4 +1,4 @@
-package com.geeks.mvp.presentation.state
+package com.geeks.mvp.presentation.utils
 
 sealed class UiState<out T> {
     object Initial : UiState<Nothing>()

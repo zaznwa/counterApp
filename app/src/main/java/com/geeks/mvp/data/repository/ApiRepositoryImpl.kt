@@ -6,7 +6,7 @@ import com.geeks.mvp.data.datacourse.network.MovieApi
 import com.geeks.mvp.data.mappers.MovieMapper
 import com.geeks.mvp.domain.model.MovieEntity
 import com.geeks.mvp.domain.repository.ApiRepository
-import com.geeks.mvp.domain.utils.Either
+import com.geeks.mvp.presentation.utils.Either
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn

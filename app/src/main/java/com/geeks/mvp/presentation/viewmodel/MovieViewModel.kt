@@ -1,17 +1,13 @@
 package com.geeks.mvp.presentation.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.geeks.mvp.domain.model.MovieEntity
 import com.geeks.mvp.domain.usecases.GetMovieUseCase
-import com.geeks.mvp.domain.utils.Either
 import com.geeks.mvp.presentation.base.BaseViewModel
-import com.geeks.mvp.presentation.state.UiState
+import com.geeks.mvp.presentation.utils.UiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class MovieViewModel(
     private val moviesUseCase: GetMovieUseCase,

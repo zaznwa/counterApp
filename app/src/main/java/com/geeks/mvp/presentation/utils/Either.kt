@@ -1,4 +1,4 @@
-package com.geeks.mvp.domain.utils
+package com.geeks.mvp.presentation.utils
 
 sealed class Either<out L, out R> {
     data class Error<L>(val error: L) : Either<L, Nothing>()
